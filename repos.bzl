@@ -59,8 +59,13 @@ def repo_infra_patches():
         build_file_generation = "on",
         build_file_proto_mode = "disable_global",  # Avoid import cyle
         importpath = "github.com/golang/protobuf",
-        sum = "h1:gyjaxf+svBWX08ZjK86iN9geUJF0H6gp2IRKX6Nf6/I=",
-        version = "v1.3.3",
+        patch_args = ["-p1"],
+        patches = [
+            # additional targets may depend on generated code for well known types
+            "@io_bazel_rules_go//third_party:com_github_golang_protobuf-extras.patch",
+        ],
+        sum = "h1:ZFgWrT+bLgsYPirOnRfKLYJLvssAegOj/hgyMFdJZe0=",
+        version = "v1.4.1",
     )
 
     # Must be kept in sync with rules_go version
